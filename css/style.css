@@ -248,6 +248,26 @@ button.small {
     font-size: 32px;
 }
 
+.dashboard-grid .stat-card:nth-child(1) {
+    background: #e0f2fe;
+    border-color: rgba(59, 130, 246, 0.22);
+}
+
+.dashboard-grid .stat-card:nth-child(2) {
+    background: #dcfce7;
+    border-color: rgba(16, 185, 129, 0.22);
+}
+
+.dashboard-grid .stat-card:nth-child(3) {
+    background: #ede9fe;
+    border-color: rgba(124, 58, 237, 0.22);
+}
+
+.dashboard-grid .stat-card:nth-child(4) {
+    background: #fff7ed;
+    border-color: rgba(245, 158, 11, 0.22);
+}
+
 .panel-row {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
