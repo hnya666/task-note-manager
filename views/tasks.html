@@ -1,0 +1,93 @@
+<div ng-controller="TasksCtrl">
+    <div class="task-card card">
+        <div class="card-header">
+            <div>
+                <h2>Tasks</h2>
+                <p class="small-caption">Track your tasks with priority, tags, and completion status.</p>
+            </div>
+            <span class="tag-badge">Tasks</span>
+        </div>
+
+        <div class="control-grid full">
+            <div class="field-group">
+                <label>Task Title</label>
+                <input type="text" ng-model="taskTitle" placeholder="Enter task title">
+            </div>
+            <div class="field-group">
+                <label>Tag (Optional)</label>
+                <input type="text" ng-model="taskTag" placeholder="Enter tag">
+            </div>
+            <div class="field-group">
+                <label>Priority</label>
+                <select ng-model="taskPriority">
+                    <option value="">Select priority</option>
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="button-row">
+            <button ng-click="addTask()">Add Task</button>
+            <button class="secondary" ng-click="taskTitle=''; taskPriority=''; taskTag=''">Clear</button>
+        </div>
+    </div>
+
+    <div class="list-card">
+        <div class="task-card" ng-repeat="task in tasks">
+            <div class="task-header">
+                <div>
+                    <h3>
+                        <span ng-if="task.pinned">📌</span>
+                        {{task.title || 'Untitled task'}}
+                        <span ng-if="task.pinned" class="pinned-badge">Pinned</span>
+                    </h3>
+                    <span class="small-caption">{{task.tag ? 'Tagged: ' + task.tag : 'No tag'}}</span>
+                </div>
+                <span class="priority {{task.priority}}">{{task.priority || 'No priority'}}</span>
+            </div>
+
+            <div class="task-meta">
+                <span class="tag-badge">{{task.tag || 'No Tag'}}</span>
+                <span class="status-badge" ng-class="task.completed ? 'completed' : 'pending'">{{task.completed ? 'Completed' : 'Pending'}}</span>
+            </div>
+
+            <label class="field-group" style="margin-top: 10px;">
+                <input type="checkbox" ng-model="task.completed" ng-change="saveTasks()" style="width:auto; margin-right: 10px;">
+                Mark complete
+            </label>
+
+            <hr class="soft-divider">
+
+            <div class="button-row">
+                <button ng-click="togglePinTask(task)">{{task.pinned ? 'Unpin' : 'Pin'}}</button>
+                <button class="secondary" ng-click="startEditTask(task)">Edit</button>
+                <button class="secondary" ng-click="deleteTask($index)">Delete</button>
+            </div>
+
+            <div ng-if="task.isEditing" class="card" style="margin-top: 18px; padding: 18px; background: #f8f5ff;">
+                <div class="field-group">
+                    <label>Edit Title</label>
+                    <input type="text" ng-model="task.editTitle" placeholder="Edit title">
+                </div>
+                <div class="field-group">
+                    <label>Edit Tag</label>
+                    <input type="text" ng-model="task.editTag" placeholder="Edit tag">
+                </div>
+                <div class="field-group">
+                    <label>Edit Priority</label>
+                    <select ng-model="task.editPriority">
+                        <option>High</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+                    </select>
+                </div>
+                <div class="button-row">
+                    <button ng-click="saveTask(task)">Save Changes</button>
+                    <button class="secondary" ng-click="task.isEditing=false">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

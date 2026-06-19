@@ -1,0 +1,42 @@
+<div ng-controller="SearchCtrl">
+    <div class="search-card card">
+        <div class="card-header">
+            <div>
+                <h2>Search</h2>
+                <p class="small-caption">Find notes, tasks, and tags in one place with a neat search view.</p>
+            </div>
+            <span class="tag-badge">Search</span>
+        </div>
+
+        <div class="field-group">
+            <label>Search Notes, Tasks or Tags</label>
+            <input type="text" ng-model="searchText" placeholder="Type a keyword or tag">
+        </div>
+    </div>
+
+    <div class="list-card">
+        <div class="note-card" ng-repeat="note in notes | filter:searchText">
+            <div class="note-header">
+                <div>
+                    <h3>{{note.title || 'Untitled note'}}</h3>
+                    <span class="small-caption">{{note.tag ? 'Tag: ' + note.tag : 'No tag added'}}</span>
+                </div>
+                <span class="tag-badge">Note</span>
+            </div>
+            <div class="note-content">{{note.content || 'No content available.'}}</div>
+        </div>
+
+        <div class="task-card" ng-repeat="task in tasks | filter:searchText">
+            <div class="task-header">
+                <div>
+                    <h3>{{task.title || 'Untitled task'}}</h3>
+                    <span class="small-caption">Priority: {{task.priority || 'None'}}</span>
+                </div>
+                <span class="status-badge" ng-class="task.completed ? 'completed' : 'pending'">{{task.completed ? 'Done' : 'Pending'}}</span>
+            </div>
+            <div class="task-meta">
+                <span class="tag-badge">{{task.tag || 'No Tag'}}</span>
+            </div>
+        </div>
+    </div>
+</div>

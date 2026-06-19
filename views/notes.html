@@ -1,0 +1,80 @@
+<div ng-controller="NotesCtrl">
+    <div class="note-card card">
+        <div class="card-header">
+            <div>
+                <h2>Notes</h2>
+                <p class="small-caption">Add, edit, pin, and tag notes with a clean workspace design.</p>
+            </div>
+            <span class="tag-badge">Notes</span>
+        </div>
+
+        <div class="control-grid full">
+            <div class="field-group">
+                <label>Title</label>
+                <input type="text" ng-model="noteTitle" placeholder="Enter title">
+            </div>
+            <div class="field-group">
+                <label>Tag (Optional)</label>
+                <input type="text" ng-model="noteTag" placeholder="Enter tag">
+            </div>
+            <div class="field-group full">
+                <label>Content</label>
+                <textarea ng-model="noteContent" placeholder="Enter note content"></textarea>
+            </div>
+        </div>
+
+        <div class="button-row">
+            <button ng-click="addNote()">Add Note</button>
+            <button class="secondary" ng-click="noteTitle=''; noteContent=''; noteTag=''">Clear</button>
+        </div>
+    </div>
+
+    <div class="list-card">
+        <div class="note-card" ng-repeat="note in notes">
+            <div class="note-header">
+                <div>
+                    <h3>
+                        <span ng-if="note.pinned">📌</span>
+                        {{note.title || 'Untitled note'}}
+                        <span ng-if="note.pinned" class="pinned-badge">Pinned</span>
+                    </h3>
+                    <span class="small-caption">{{note.tag ? 'Tagged: ' + note.tag : 'No tag added yet'}}</span>
+                </div>
+                <span class="status-badge" ng-class="note.pinned ? 'pinned-badge' : 'pending'">{{note.pinned ? 'Pinned' : 'Note'}}</span>
+            </div>
+
+            <div class="note-content">{{note.content || 'No content available.'}}</div>
+
+            <div class="note-meta">
+                <span class="tag-badge">{{note.tag || 'No Tag'}}</span>
+            </div>
+
+            <hr class="soft-divider">
+
+            <div class="button-row">
+                <button ng-click="togglePinNote(note)">{{note.pinned ? 'Unpin' : 'Pin'}}</button>
+                <button class="secondary" ng-click="startEditNote(note)">Edit</button>
+                <button class="secondary" ng-click="deleteNote($index)">Delete</button>
+            </div>
+
+            <div ng-if="note.isEditing" class="card" style="margin-top: 18px; padding: 18px; background: #f8f5ff;">
+                <div class="field-group">
+                    <label>Edit Title</label>
+                    <input type="text" ng-model="note.editTitle" placeholder="Edit title">
+                </div>
+                <div class="field-group">
+                    <label>Edit Tag</label>
+                    <input type="text" ng-model="note.editTag" placeholder="Edit tag">
+                </div>
+                <div class="field-group">
+                    <label>Edit Content</label>
+                    <textarea ng-model="note.editContent" placeholder="Edit content"></textarea>
+                </div>
+                <div class="button-row">
+                    <button ng-click="saveNote(note)">Save Changes</button>
+                    <button class="secondary" ng-click="note.isEditing=false">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

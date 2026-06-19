@@ -1,0 +1,32 @@
+<div ng-controller="HomeCtrl">
+    <div class="dashboard-grid">
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <span class="stat-title">Total Notes</span>
+                <span class="stat-icon">🗒️</span>
+            </div>
+            <strong>{{getTotalNotes()}}</strong>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <span class="stat-title">Total Tasks</span>
+                <span class="stat-icon">🧩</span>
+            </div>
+            <strong>{{getTotalTasks()}}</strong>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <span class="stat-title">Completed Tasks</span>
+                <span class="stat-icon">✅</span>
+            </div>
+            <strong>{{getCompletedTasks()}}</strong>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-top">
+                <span class="stat-title">Pending Tasks</span>
+                <span class="stat-icon">⏳</span>
+            </div>
+            <strong>{{getPendingTasks()}}</strong>
+        </div>
+    </div>
+</div>
