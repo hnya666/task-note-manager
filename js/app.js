@@ -86,19 +86,29 @@ function($scope,NoteService)
 
     $scope.addNote=function()
 {
-    $scope.notes.push(
+    // Validate that title is not empty
+    if(!$scope.noteTitle || $scope.noteTitle.trim() === "")
     {
-    title:$scope.noteTitle,
-    content:$scope.noteContent,
-    tag:$scope.noteTag,
-    pinned:false
-});
+        alert("Please enter a note title");
+        return;
+    }
+
+    // Create a fresh object to avoid reference issues
+    var newNote = {
+        title: $scope.noteTitle.trim(),
+        content: $scope.noteContent || "",
+        tag: $scope.noteTag || "",
+        pinned: false
+    };
+
+    $scope.notes.push(newNote);
 
     localStorage.setItem(
         "notes",
         JSON.stringify($scope.notes)
     );
 
+    // Clear input fields after successful add
     $scope.noteTitle="";
     $scope.noteContent="";
     $scope.noteTag="";
@@ -167,20 +177,30 @@ function($scope,TaskService)
 
     $scope.addTask=function()
 {
-    $scope.tasks.push(
+    // Validate that title is not empty
+    if(!$scope.taskTitle || $scope.taskTitle.trim() === "")
     {
-     title:$scope.taskTitle,
-    priority:$scope.taskPriority,
-    tag:$scope.taskTag,
-    completed:false,
-    pinned:false   
-    });
+        alert("Please enter a task title");
+        return;
+    }
+
+    // Create a fresh object to avoid reference issues
+    var newTask = {
+        title: $scope.taskTitle.trim(),
+        priority: $scope.taskPriority || "",
+        tag: $scope.taskTag || "",
+        completed: false,
+        pinned: false
+    };
+
+    $scope.tasks.push(newTask);
 
     localStorage.setItem(
         "tasks",
         JSON.stringify($scope.tasks)
     );
 
+    // Clear input fields after successful add
     $scope.taskTitle="";
     $scope.taskPriority="";
     $scope.taskTag="";

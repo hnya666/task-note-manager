@@ -30,7 +30,7 @@
     </div>
 
     <div class="list-card">
-        <div class="note-card" ng-repeat="note in notes">
+        <div class="note-card" ng-repeat="note in notes track by $index">
             <div class="note-header">
                 <div>
                     <h3>
@@ -38,7 +38,7 @@
                         {{note.title || 'Untitled note'}}
                         <span ng-if="note.pinned" class="pinned-badge">Pinned</span>
                     </h3>
-                    <span class="small-caption">{{note.tag ? 'Tagged: ' + note.tag : 'No tag added yet'}}</span>
+                    
                 </div>
                 <span class="status-badge" ng-class="note.pinned ? 'pinned-badge' : 'pending'">{{note.pinned ? 'Pinned' : 'Note'}}</span>
             </div>
@@ -46,7 +46,7 @@
             <div class="note-content">{{note.content || 'No content available.'}}</div>
 
             <div class="note-meta">
-                <span class="tag-badge">{{note.tag || 'No Tag'}}</span>
+                <span>Tag: {{note.tag || 'No Tag'}}</span>
             </div>
 
             <hr class="soft-divider">

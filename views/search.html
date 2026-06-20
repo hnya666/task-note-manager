@@ -15,18 +15,25 @@
     </div>
 
     <div class="list-card">
-        <div class="note-card" ng-repeat="note in notes | filter:searchText">
+        <div ng-if="(notes | filter:searchText).length === 0 && (tasks | filter:searchText).length === 0">
+            <div class="card" style="text-align: center; padding: 60px 40px;">
+                <h3 style="color: #9ca3af; font-size: 20px; margin-bottom: 12px;">No results found</h3>
+                <p style="color: #d1d5db; font-size: 14px;">Try searching with different keywords or tags</p>
+            </div>
+        </div>
+
+        <div class="note-card" ng-repeat="note in notes | filter:searchText track by $index">
             <div class="note-header">
                 <div>
                     <h3>{{note.title || 'Untitled note'}}</h3>
-                    <span class="small-caption">{{note.tag ? 'Tag: ' + note.tag : 'No tag added'}}</span>
+                    <span class="small-caption">Tag: {{note.tag || 'No Tag'}}</span>
                 </div>
                 <span class="tag-badge">Note</span>
             </div>
             <div class="note-content">{{note.content || 'No content available.'}}</div>
         </div>
 
-        <div class="task-card" ng-repeat="task in tasks | filter:searchText">
+        <div class="task-card" ng-repeat="task in tasks | filter:searchText track by $index">
             <div class="task-header">
                 <div>
                     <h3>{{task.title || 'Untitled task'}}</h3>
@@ -35,7 +42,7 @@
                 <span class="status-badge" ng-class="task.completed ? 'completed' : 'pending'">{{task.completed ? 'Done' : 'Pending'}}</span>
             </div>
             <div class="task-meta">
-                <span class="tag-badge">{{task.tag || 'No Tag'}}</span>
+                <span>Tag: {{task.tag || 'No Tag'}}</span>
             </div>
         </div>
     </div>

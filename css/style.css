@@ -19,17 +19,24 @@ select {
 
 .app-shell {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 1fr;
     min-height: 100vh;
 }
 
 .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    overflow-y: auto;
     background: #ffffff;
     border-right: 1px solid rgba(15, 23, 42, 0.08);
     display: flex;
     flex-direction: column;
     gap: 36px;
     padding: 46px 32px;
+    z-index: 1000;
 }
 
 .sidebar-brand {
@@ -118,7 +125,9 @@ select {
 }
 
 .app-content {
+    margin-left: 280px;
     padding: 48px 54px;
+    width: calc(100% - 280px);
 }
 
 .topbar {
@@ -428,6 +437,17 @@ button.small {
     color: #4b5563;
     font-weight: 700;
     letter-spacing: 0.01em;
+}
+
+.field-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.field-inline input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
 }
 
 .button-row {
