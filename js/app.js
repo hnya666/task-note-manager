@@ -235,6 +235,15 @@ $scope.deleteTask=function(index)
     JSON.stringify($scope.tasks)
 );
     };
+
+    $scope.startEditTask=function(task)
+    {
+        task.isEditing=true;
+        task.editTitle=task.title;
+        task.editTag=task.tag;
+        task.editPriority=task.priority;
+    };
+
     $scope.togglePinTask=function(task)
 {
     var index=$scope.tasks.indexOf(task);
